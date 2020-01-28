@@ -5,7 +5,7 @@ from .models import User
 
 class UserType(DjangoObjectType):
 
-    rooms = graphene.List("rooms.types.RoomType")
+    # rooms = graphene.List("rooms.types.RoomType")
 
     class Meta:
         model = User

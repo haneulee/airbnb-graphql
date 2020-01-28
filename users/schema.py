@@ -1,15 +1,15 @@
 import graphene
 from .types import UserType
-from .models import User
+from .mutations import CreateAccountMutation
+from .queries import resolve_user
 
 
 class Query(object):
 
-    rooms = graphene.List("rooms.schema.RoomType")
-    user = graphene.Field(UserType, id=graphene.Int(required=True))
+    user = graphene.Field(
+        UserType, id=graphene.Int(required=True), resolver=resolve_user)
 
-    def resolve_user(self, info, id):
-        try:
-            return User.objects.get(id=id)
-        except:
-            return None
+
+class Mutation(object):
+
+    create_account = CreateAccountMutation.Field()
